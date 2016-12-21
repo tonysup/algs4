@@ -6,10 +6,10 @@ public class Deque<Item> implements Iterable<Item> {
     private Node first = null;
     private Node last = null;
 
-    class Node {
-        Item info;
-        Node pre;
-        Node next;
+    private class Node {
+        private Item info;
+        private Node pre;
+        private Node next;
 
         public Node(Item item, Node pre, Node next) {
             this.info = item;
@@ -20,7 +20,8 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Deque() { // construct an empty deque
         this.count = 0;
-        this.first = this.last = null;
+        this.first = null;
+        this.last  = null;
     }
 
     public boolean isEmpty() { // is the deque empty?
