@@ -52,7 +52,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private void resize(int max) {
-        Item[] temp = (Item[]) new Object[20];
+        Item[] temp = (Item[]) new Object[max];
         for (int i = 0; i < count; i++) {
             temp[i] = array[i];
         }
@@ -90,10 +90,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public static void main(String[] args) { // unit testing
         RandomizedQueue<Integer> info = new RandomizedQueue<>();
         info.enqueue(5);
+        System.out.println("dequeue:" + info.dequeue());
         info.enqueue(6);
         System.out.println("dequeue:" + info.dequeue());
         info.enqueue(78);
         System.out.println("sample:" + info.sample());
+        System.out.println("dequeue:" + info.dequeue());
         info.enqueue(9);
         Iterator<Integer> iterator = info.iterator();
         while (iterator.hasNext()) {

@@ -21,7 +21,7 @@ public class Deque<Item> implements Iterable<Item> {
     public Deque() { // construct an empty deque
         this.count = 0;
         this.first = null;
-        this.last  = null;
+        this.last = null;
     }
 
     public boolean isEmpty() { // is the deque empty?
@@ -70,8 +70,13 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException("deque is empty.");
         }
         Item tmp = first.info;
-        first.next.pre = null;
+        if (first.next != null) {
+            first.next.pre = null;
+        }
         first = first.next;
+        if (first == null) {
+            last = null;
+        }
         count--;
         return tmp;
     }
@@ -81,8 +86,13 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException("deque is empty.");
         }
         Item tmp = last.info;
-        last.pre.next = null;
+        if (last.pre != null) {
+            last.pre.next = null;
+        }
         last = last.pre;
+        if (last == null) {
+            first = null;
+        }
         count--;
         return tmp;
     }
@@ -117,11 +127,13 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args) { // unit testing
         Deque<Integer> intlist = new Deque<>();
         intlist.addFirst(5);
+        intlist.removeLast();
         intlist.addLast(8);
         intlist.removeFirst();
         intlist.addFirst(13);
-        intlist.addLast(67);
         intlist.removeLast();
+        intlist.addLast(67);
+        // intlist.removeLast();
 
         Iterator<Integer> iterator = intlist.iterator();
         while (iterator.hasNext()) {
