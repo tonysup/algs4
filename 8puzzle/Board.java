@@ -148,7 +148,7 @@ public class Board {
                     }
                 }
                 tmp[blankrow][blankcol] = tmp[blankrow-1][blankcol];
-                tmp[blankrow][blankcol] = 0;
+                tmp[blankrow-1][blankcol] = 0;
                 Board upRow = new Board(tmp);
                 neighorList.add(upRow);
             }

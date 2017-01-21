@@ -34,10 +34,12 @@ public class Solver {
         twinPQ.insert(twinsInit);
         minPQ.insert(init);
         arrayList = new ArrayDeque<Board>();
-        int count = 0;
+        //int count = 0;
         
         while(true){
             if(minPQ.isEmpty()){
+                //System.out.println("count is " + count);
+                //System.out.println("pq is empty.");
                 break;
             }
             Node node = minPQ.delMin();
@@ -50,7 +52,7 @@ public class Solver {
                     arrayList.addFirst(tmp.board);
                     tmp = tmp.preNode;
                 }
-                System.out.println("total count:" + count);
+                //System.out.println("total count:" + count);
                 break;
             }
             if(twinNode.board.isGoal()){
@@ -64,10 +66,17 @@ public class Solver {
                 while(iterator.hasNext()){
                     Board tmpBoard = iterator.next();
                     //System.out.println("neigh:" + tmpBoard.toString());
-                    if(node.preNode != null){
-                        if(tmpBoard.equals(node.preNode.board)){
-                            continue;
+                    Node checkNode = node.preNode;
+                    boolean findEqual = false;
+                    while(checkNode != null){
+                        if(tmpBoard.equals(checkNode.board)){
+                            findEqual = true;
+                            break;
                         }
+                        checkNode = checkNode.preNode;
+                    }
+                    if(findEqual){
+                        continue;
                     }
                     Node tmpNode = new Node();
                     tmpNode.board = tmpBoard;
@@ -82,10 +91,22 @@ public class Solver {
                 Iterator<Board> iterator = twinNeigh.iterator();
                 while(iterator.hasNext()){
                     Board tmpBoard = iterator.next();
-                    if(twinNode.preNode != null){
+                    /*if(twinNode.preNode != null){
                         if(tmpBoard.equals(twinNode.preNode.board)){
                             continue;
                         }
+                    }*/
+                    Node checkNode = twinNode.preNode;
+                    boolean findEqual = false;
+                    while(checkNode != null){
+                        if(tmpBoard.equals(checkNode.board)){
+                            findEqual = true;
+                            break;
+                        }
+                        checkNode = checkNode.preNode;
+                    }
+                    if(findEqual){
+                        continue;
                     }
                     Node tmpNode = new Node();
                     tmpNode.board = tmpBoard;
@@ -94,7 +115,7 @@ public class Solver {
                     twinPQ.insert(tmpNode);
                 }
             }
-            ++count;
+            //++count;
         }
     }
     
